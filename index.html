@@ -1,0 +1,59 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/.  -->
+
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- try to counts default scaling on mobile, see 
+       https://developer.mozilla.org/en/Mobile/Viewport_meta_tag -->
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=.6667, maximum-scale=.6667">
+  <title>Tricorder</title>
+  <script src="js/tricorder.js"></script>
+  <link rel="stylesheet" href="style/tricorder.css">
+  <link rel="shortcut icon" href="style/tilex32.png" type="image/png">
+</head>
+<body>
+<h1>Tricorder</h1>
+
+<div id="sidebar">
+<div id="sideTop">
+<div id="stardate">[74]</div>
+</div>
+
+<div id="sideSepTop">
+<div id="sideSepTopInsert"></div>
+</div>
+
+<div id="sideSepBottom">
+<div id="sideSepBottomInsert"></div>
+</div>
+
+<div id="sideBottom">
+<ul id="navlist">
+<li id="navPos"><a href="#">Position</a></li>
+<li id="navGrav"><a href="#">Gravity</a></li>
+<li id="navAcou"><a href="#">Acoustics</a></li>
+</ul>
+</div>
+
+<div id="sideRemark">
+<a href="http://www.startrek.com/">STAR TREK</a> and related items are trademarks of <a href="http://www.paramount.com/">Paramount Pictures</a>.
+</div>
+</div>
+
+<div id="mainarea">
+<div id="mainHeader">
+Web Tricorder
+</div>
+
+<div id="mainSepTop"></div>
+<div id="mainSepBottom"></div>
+
+<div id="mainContent">
+<p>This is the main area for tricorder output.</p>
+</div>
+
+</body>
+</html>

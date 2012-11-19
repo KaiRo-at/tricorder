@@ -1,0 +1,200 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+html {
+  background-color: #000000;
+  height: 100%;
+}
+
+body {
+  border: 0px solid #9C9CFF;
+  font-size: 16px;
+  margin: 0px;
+  height: 100%;
+  background-color: #000000;
+  color: #FF9F00;
+  position: relative;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+h1 {
+  display: none;
+}
+
+a:link { color: #FF9F00; }
+a:visited { color: #8050B0; }
+a:hover, a:active { color: #FFCF00; }
+
+#sidebar {
+  position: absolute;
+  top: 3px; 
+  bottom: 3px;
+  left: 3px;
+  right: auto;
+  width: 140px;
+ height: auto;
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
+  border: 0px;
+  overflow: hidden;
+}
+
+#sideTop {
+  background-color: #6080F0;
+  color: #000000;
+  width: 120px;
+  height: 80px;
+  margin-bottom: 3px;
+}
+
+#stardate {
+  background-color: #A06060;
+  color: #000000;
+  padding: 3px 3px 10px;
+  font-weight: bold;
+  text-align: right;
+  border-bottom: 3px solid black;
+}
+
+#sideSepTop {
+  background-color: #808090;
+  width: 140px;
+  height: 20px;
+  margin-bottom: 3px;
+  padding-bottom: 10px;
+  border-radius: 0px 0px 0px 15px;
+}
+#sideSepTopInsert {
+  background-color: #000000;
+  width: 20px;
+  height: 100%;
+  margin-left: 120px;
+  border-radius: 0px 0px 0px 15px;
+}
+#sideSepBottom {
+  background-color: #008484;
+  width: 140px;
+  height: 50px;
+  margin-bottom: 3px;
+  padding-top: 10px;
+  border-radius: 15px 0px 0px 0px;
+}
+#sideSepBottomInsert {
+  background-color: #000000;
+  width: 20px;
+  height: 100%;
+  margin-left: 120px;
+  border-radius: 15px 0px 0px 0px;
+}
+
+#sideBottom {
+  background-color: #9C9CFF;
+  color: #000000;
+  width: 120px;
+  margin-bottom: 3px;
+  position: absolute;
+  top: 179px;
+  bottom: 40px;
+  height: auto;
+}
+
+#navlist {
+  list-style-type: none;
+  margin: 0 0 1em;
+  padding: 0 0 0.2em;
+}
+#navlist > li {
+  margin: 0;
+  padding: 0 0.2em 0;
+  border-bottom: 3px solid #000000;
+  font-weight: bold;
+}
+#navlist > li > a {
+  display: block;
+  text-decoration: none;
+  width: 100%;
+  padding: 0.3em 0;
+}
+#navlist > li:hover,
+#navlist > li:active,
+#navlist > li:hover > a,
+#navlist li:active > a,
+#navlist > li > a:hover,
+#navlist > li > a:active {
+  background-color: #FFCF00;
+  color: #000000;
+}
+
+#navPos, #navPos > a {
+  background-color: #FF9F00;
+  color: #000000;
+}
+#navGrav, #navGrav > a {
+  background-color: #C09070;
+  color: #000000;
+}
+#navAcou, #navAcou > a {
+  background-color: #6000CF;
+  color: #000000;
+}
+
+#sideRemark {
+  background-color: #E7ADE7;
+  color: #000000;
+  width: 120px;
+  font-size: 10px;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  height: 40px;
+}
+#sideRemark a:link, #sideRemark a:visited { color: #000000; }
+#sideRemark a:hover, #sideRemark a:active { color: #008484; }
+
+#mainarea {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 145px;
+  right: 3px;
+  width: auto;
+  padding: 1px;
+  min-height: 35em;
+  overflow: none;
+  border: none;
+}
+
+#mainHeader {
+  color: #FFCF00;
+  font-size: 3em;
+  font-weight: bold;
+  height: 102px;
+  text-align: center;
+}
+
+#mainSepTop {
+  background-color: #E7ADE7;
+  font-size: 1px;
+  height: 10px;
+  margin-bottom: 3px;
+}
+#mainSepBottom {
+  background-color: #A09090;
+  font-size: 1px;
+  height: 10px;
+  margin-bottom: 3px;
+}
+
+#mainContent {
+  position: absolute;
+  top: 129px;
+  bottom: 0px;
+  left: 0px;
+  right: 1px;
+  width: auto;
+  padding: 1px;
+  height: auto;
+  overflow: auto;
+  border: none;
+}
