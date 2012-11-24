@@ -212,3 +212,7 @@ section {
 section.active {
   display: block;
 }
+
+.gravVal {
+  text-align: right;
+}
