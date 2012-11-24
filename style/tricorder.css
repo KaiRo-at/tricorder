@@ -2,6 +2,17 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+@font-face {
+  font-family: DVSC; /* Original in Star Trek is Helvetica Ultra Condensed */
+  src: url("DejaVuSansCondensed.ttf");
+}
+
+@font-face {
+  font-family: DVSC;
+  src: url("DejaVuSansCondensed-Bold.ttf");
+  font-weight: bold;
+}
+
 html {
   background-color: #000000;
   height: 100%;
@@ -12,10 +23,10 @@ body {
   font-size: 16px;
   margin: 0px;
   height: 100%;
-  background-color: #000000;
+  background: #000000 url("tilexborder.png") center center no-repeat;
   color: #FF9F00;
   position: relative;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: DVSC,"DejaVu Sans",Arial,Helvetica,sans-serif;
 }
 
 h1 {
@@ -33,7 +44,7 @@ a:hover, a:active { color: #FFCF00; }
   left: 3px;
   right: auto;
   width: 140px;
- height: auto;
+  height: auto;
   padding: 0px;
   margin: 0px 0px 0px 0px;
   border: 0px;
@@ -207,6 +218,7 @@ a:hover, a:active { color: #FFCF00; }
 
 section {
   display: none;
+  background-color: rgba(0,0,0,0.8);
 }
 
 section.active {
