@@ -53,14 +53,46 @@ Web Tricorder
 <div id="mainSepBottom"></div>
 
 <div id="mainContent">
-<section id="sectNull">
-<p>This is the main area for tricorder output.</p>
+<section id="sectNull" class="active">
+<p>Please select a data input module from the left-side navigation.</p>
 </section>
 <section id="sectPos">
-<p>This is the main area for position tricorder output.</p>
+<p id="posunavail">
+Position watching is unavailable on this tricorder device.
+<br/>Please talk to your superior officer or Starfleet contact to acquire
+a better device.
+</p>
+<div id="posavail" style="display:none">
+<table>
+<tr><td>Latitude:</td><td id="posLat">...</td></tr>
+<tr><td>Longitude:</td><td id="posLong">...</td></tr>
+<tr><td>Accuracy:</td><td id="posAcc">...</td></tr>
+<tr><td>Altitude:</td><td id="posAlt">...</td></tr>
+<tr><td>Alt. Accuracy:</td><td id="posAltAcc">...</td></tr>
+<tr><td>Heading:</td><td id="posHead">...</td></tr>
+<tr><td>Speed:</td><td id="posSpd">...</td></tr>
+<tr><td>Timestamp:</td><td id="posTime">...</td></tr>
+</table>
+</div>
 </section>
 <section id="sectGrav">
-<p>This is the main area for gravity tricorder output.</p>
+<p id="gravunavail">
+Gravity sensors are unavailable on this tricorder device.
+<br/>Please talk to your superior officer or Starfleet contact to acquire
+a better device.
+</p>
+<div id="gravavail" style="display:none">
+<table>
+<tr><td>X:</td><td id="gravX">...</td></tr>
+<tr><td>Y:</td><td id="gravY">...</td></tr>
+<tr><td>Z:</td><td id="gravZ">...</td></tr>
+<tr><td>Rotation:</td><td id="gravRot">...</td></tr>
+<tr><td>Absolute Orientation:</td><td id="gravAbs">...</td></tr>
+<tr><td>Alpha:</td><td id="gravAlpha">...</td></tr>
+<tr><td>Beta:</td><td id="gravBeta">...</td></tr>
+<tr><td>Gamma:</td><td id="gravGamma">...</td></tr>
+</table>
+</div>
 </section>
 <section id="sectAcou">
 <p>This is the main area for acoustics tricorder output.</p>
