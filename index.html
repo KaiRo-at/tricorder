@@ -32,14 +32,15 @@
 
 <div id="sideBottom">
 <ul id="navlist">
-<li id="navPos"><a href="#">Position</a></li>
-<li id="navGrav"><a href="#">Gravity</a></li>
-<li id="navAcou"><a href="#">Acoustics</a></li>
+<li id="navPos"><a href="#" onclick="switchModule('Pos');">Position</a></li>
+<li id="navGrav"><a href="#" onclick="switchModule('Grav');">Gravity</a></li>
+<li id="navAcou"><a href="#" onclick="switchModule('Acou');">Acoustics</a></li>
 </ul>
 </div>
 
 <div id="sideRemark">
-<a href="http://www.startrek.com/">STAR TREK</a> and related items are trademarks of <a href="http://www.paramount.com/">Paramount Pictures</a>.
+<a href="http://www.startrek.com/">STAR TREK</a> and related items are
+trademarks of <a href="http://www.paramount.com/">Paramount Pictures</a>.
 </div>
 </div>
 
@@ -52,7 +53,18 @@ Web Tricorder
 <div id="mainSepBottom"></div>
 
 <div id="mainContent">
+<section id="sectNull">
 <p>This is the main area for tricorder output.</p>
+</section>
+<section id="sectPos">
+<p>This is the main area for position tricorder output.</p>
+</section>
+<section id="sectGrav">
+<p>This is the main area for gravity tricorder output.</p>
+</section>
+<section id="sectAcou">
+<p>This is the main area for acoustics tricorder output.</p>
+</section>
 </div>
 
 </body>

@@ -119,11 +119,17 @@ a:hover, a:active { color: #FFCF00; }
 #navlist > li:hover,
 #navlist > li:active,
 #navlist > li:hover > a,
-#navlist li:active > a,
+#navlist > li:active > a,
 #navlist > li > a:hover,
 #navlist > li > a:active {
   background-color: #FFCF00;
   color: #000000;
+}
+
+#navlist > li.active,
+#navlist > li.active > a {
+  background-color: #008484;
+  color: #FFCF00;
 }
 
 #navPos, #navPos > a {
@@ -197,4 +203,12 @@ a:hover, a:active { color: #FFCF00; }
   height: auto;
   overflow: auto;
   border: none;
+}
+
+section {
+  display: none;
+}
+
+section.active {
+  display: block;
 }

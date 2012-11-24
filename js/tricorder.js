@@ -22,3 +22,17 @@ function updateStardate() {
 
   setTimeout(updateStardate, 5*60*1000);
 }
+
+function switchModule(modname) {
+  var sections = document.getElementsByTagName('section');
+  for (var i = 0; i <= sections.length - 1; i++) {
+    sections[i].classList.remove("active");
+  }
+  var navs = document.getElementById('navlist').children;
+  for (var i = 0; i <= navs.length - 1; i++) {
+    navs[i].classList.remove("active");
+  }
+
+  document.getElementById("nav" + modname).classList.add("active");
+  document.getElementById("sect" + modname).classList.add("active");
+}
