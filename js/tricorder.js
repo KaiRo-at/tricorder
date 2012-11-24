@@ -110,16 +110,16 @@ var gModGrav = {
     document.getElementById("gravavail").style.display = "none";
   },
   orientEvent: function(orientData) {
-    document.getElementById("gravAbs").textContent = orientData.absolute;
-    document.getElementById("gravAlpha").textContent = orientData.alpha;
-    document.getElementById("gravBeta").textContent = orientData.beta;
-    document.getElementById("gravGamma").textContent = orientData.gamma;
+    //document.getElementById("gravAbs").textContent = orientData.absolute;
+    document.getElementById("gravAlpha").textContent = orientData.alpha.toFixed(1) + "°";
+    document.getElementById("gravBeta").textContent = orientData.beta.toFixed(1) + "°";
+    document.getElementById("gravGamma").textContent = orientData.gamma.toFixed(1) + "°";
   },
   motionEvent: function(event) {
-    document.getElementById("gravX").textContent = event.accelerationIncludingGravity.x;
-    document.getElementById("gravY").textContent = event.accelerationIncludingGravity.y;
-    document.getElementById("gravZ").textContent = event.accelerationIncludingGravity.z;
-    document.getElementById("gravRot").textContent = event.rotationRate;
+    document.getElementById("gravX").textContent = event.accelerationIncludingGravity.x.toFixed(2) + " m/s²";
+    document.getElementById("gravY").textContent = event.accelerationIncludingGravity.y.toFixed(2) + " m/s²";
+    document.getElementById("gravZ").textContent = event.accelerationIncludingGravity.z.toFixed(2) + " m/s²";
+    //document.getElementById("gravRot").textContent = event.rotationRate;
   },
 }
 
