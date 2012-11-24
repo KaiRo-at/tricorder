@@ -1,0 +1,16 @@
+{
+  "name": "Tricorder",
+  "description": "Display data from your device sensors in Star Trek style.",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Robert Kaiser",
+    "url": "http://www.kairo.at/"
+  },
+  "icons": {
+    "16": "/style/tilex16.png",
+    "32": "/style/tilex32.png",
+    "48": "/style/tilex48.png",
+    "64": "/style/tilex64.png",
+    "128": "/style/tilex128.png"
+  }
+}

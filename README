@@ -1,0 +1,12 @@
+This web app shows data from device sensors in the style of a Starfleet
+Tricorder with LCARS interface as seen in the popluar Star Trek series and
+movies.
+
+This app is destined to be listed in the Firefox Marketplace,
+but not developed far enough yet.
+
+The main repo is http://git-public.kairo.at/?p=tricorder.git;a=summary but it's
+listed on GitHub at https://github.com/KaiRo-at/tricorder for convenience for
+potential contributors. See the TODO for tasks that you can help with.
+
+Please don't use GitHub for issue tracking but http://bugzilla.kairo.at/
