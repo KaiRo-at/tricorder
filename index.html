@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="style/tricorder.css">
   <link rel="shortcut icon" href="style/tilex32.png" type="image/png">
 </head>
-<body>
+<body id="body">
 <h1>Tricorder</h1>
 
 <div id="sidebar">
@@ -32,16 +32,15 @@
 
 <div id="sideBottom">
 <ul id="navlist">
-<li id="navPos"><a href="#" onclick="switchModule('Pos');">Position</a></li>
-<li id="navGrav"><a href="#" onclick="switchModule('Grav');">Gravity</a></li>
-<li id="navAcou"><a href="#" onclick="switchModule('Acou');">Acoustics</a></li>
+<li id="navPos" onclick="switchModule('Pos');">Position</li>
+<li id="navGrav" onclick="switchModule('Grav');">Gravity</li>
+<li id="navAcou" onclick="switchModule('Acou');">Acoustics</li>
 </ul>
 </div>
 
-<div id="sideRemark">
-<a href="http://www.startrek.com/">STAR TREK</a> and related items are
-trademarks of <a href="http://www.paramount.com/">Paramount Pictures</a>.
-</div>
+<ul id="sideRemark">
+<li onclick="toggleFullscreen();">Full Screen</li>
+</ul>
 </div>
 
 <div id="mainarea">

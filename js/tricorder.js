@@ -3,9 +3,21 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 var gStardate, gSDBase;
+var gSounds = {};
 
 window.onload = function() {
   setTimeout(updateStardate, 0);
+  gSounds.scan = new Audio("sound/scan.opus");
+  gSounds.scan.loop = true;
+  gSounds.launch = new Audio("sound/launch.opus");
+  gSounds.shutdown = new Audio("sound/shutdown.opus");
+  gSounds.keyaction = new Audio("sound/key-action.opus");
+  gSounds.keypress = new Audio("sound/key-press.opus");
+
+  gSounds.launch.play();
+  window.addEventListener("beforeunload", function( event ) {
+    gSounds.shutdown.play();
+  }, false);
 }
 
 function updateStardate() {
@@ -23,7 +35,33 @@ function updateStardate() {
   setTimeout(updateStardate, 5*60*1000);
 }
 
+function toggleFullscreen() {
+  gSounds.keyaction.play();
+  if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+      (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+      (document.webkitFullScreenElement && document.webkitFullScreenElement !== null)) {
+    if (document.cancelFullScreen) {
+      document.cancelFullScreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitCancelFullScreen) {
+      document.webkitCancelFullScreen();
+    }
+  }
+  else {
+    var elem = document.getElementById("body");
+    if (elem.requestFullScreen) {
+      elem.requestFullScreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullScreen) {
+      elem.webkitRequestFullScreen();
+    }
+  }
+}
+
 function switchModule(modname) {
+  gSounds.keyaction.play();
   var sections = document.getElementsByTagName('section');
   for (var i = 0; i <= sections.length - 1; i++) {
     if (sections[i].classList.contains("active")) {
@@ -45,6 +83,7 @@ function switchModule(modname) {
 var gModPos = {
   activate: function() {
     if (navigator.geolocation) {
+      gSounds.scan.play();
       document.getElementById("posunavail").style.display = "none";
       document.getElementById("posavail").style.display = "block";
       this.watchID = navigator.geolocation.watchPosition(
@@ -79,6 +118,7 @@ var gModPos = {
     }
   },
   deactivate: function() {
+    gSounds.scan.pause();
     if (this.watchID) {
       navigator.geolocation.clearWatch(this.watchID);
     }
@@ -98,12 +138,14 @@ var gModPos = {
 
 var gModGrav = {
   activate: function() {
+    gSounds.scan.play();
     document.getElementById("gravunavail").style.display = "none";
     document.getElementById("gravavail").style.display = "block";
     window.addEventListener("deviceorientation", this.orientEvent, true);
     window.addEventListener("devicemotion", this.motionEvent, true);
   },
   deactivate: function() {
+    gSounds.scan.pause();
     window.removeEventListener("deviceorientation", this.orientEvent, true);
     window.removeEventListener("devicemotion", this.motionEvent, true);
     document.getElementById("gravunavail").style.display = "block";
@@ -124,11 +166,19 @@ var gModGrav = {
 }
 
 var gModAcou = {
-  activate: function() {},
-  deactivate: function() {},
+  activate: function() {
+    //gSounds.scan.play();
+  },
+  deactivate: function() {
+    gSounds.scan.pause();
+  },
 }
 
 var gModNull = {
-  activate: function() {},
-  deactivate: function() {},
+  activate: function() {
+    //gSounds.scan.play();
+  },
+  deactivate: function() {
+    gSounds.scan.pause();
+  },
 }

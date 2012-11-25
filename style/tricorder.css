@@ -2,15 +2,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@font-face {
-  font-family: DVSC; /* Original in Star Trek is Helvetica Ultra Condensed */
-  src: url("DejaVuSansCondensed.ttf");
-}
 
+/* The original LCARS font in Star Trek is Helvetica Ultra Condensed.
+ * We try to use open stuff here, so we use OSP-DIN from
+ * http://openfontlibrary.org/en/font/osp-din, which is licensed under the
+ * SIL OFL - http://scripts.sil.org/OFL */
 @font-face {
-  font-family: DVSC;
-  src: url("DejaVuSansCondensed-Bold.ttf");
-  font-weight: bold;
+  font-family: OSPDIN;
+  src: url('OSPDIN.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html {
@@ -26,7 +27,7 @@ body {
   background-color: #000000;
   color: #FF9F00;
   position: relative;
-  font-family: DVSC,"DejaVu Sans",Arial,Helvetica,sans-serif;
+  font-family: OSPDIN,sans-serif;
 }
 
 h1 {
@@ -43,7 +44,7 @@ a:hover, a:active { color: #FFCF00; }
   bottom: 3px;
   left: 3px;
   right: auto;
-  width: 140px;
+  width: 90px;
   height: auto;
   padding: 0px;
   margin: 0px 0px 0px 0px;
@@ -54,8 +55,8 @@ a:hover, a:active { color: #FFCF00; }
 #sideTop {
   background-color: #6080F0;
   color: #000000;
-  width: 120px;
-  height: 80px;
+  width: 70px;
+  height: 60px;
   margin-bottom: 3px;
 }
 
@@ -63,14 +64,13 @@ a:hover, a:active { color: #FFCF00; }
   background-color: #A06060;
   color: #000000;
   padding: 3px 3px 10px;
-  font-weight: bold;
   text-align: right;
   border-bottom: 3px solid black;
 }
 
 #sideSepTop {
   background-color: #808090;
-  width: 140px;
+  width: 90px;
   height: 20px;
   margin-bottom: 3px;
   padding-bottom: 10px;
@@ -80,12 +80,12 @@ a:hover, a:active { color: #FFCF00; }
   background-color: #000000;
   width: 20px;
   height: 100%;
-  margin-left: 120px;
+  margin-left: 70px;
   border-radius: 0px 0px 0px 15px;
 }
 #sideSepBottom {
   background-color: #008484;
-  width: 140px;
+  width: 90px;
   height: 50px;
   margin-bottom: 3px;
   padding-top: 10px;
@@ -95,18 +95,18 @@ a:hover, a:active { color: #FFCF00; }
   background-color: #000000;
   width: 20px;
   height: 100%;
-  margin-left: 120px;
+  margin-left: 70px;
   border-radius: 15px 0px 0px 0px;
 }
 
 #sideBottom {
   background-color: #9C9CFF;
   color: #000000;
-  width: 120px;
+  width: 70px;
   margin-bottom: 3px;
   position: absolute;
-  top: 179px;
-  bottom: 40px;
+  top: 159px;
+  bottom: 2em;
   height: auto;
 }
 
@@ -117,41 +117,31 @@ a:hover, a:active { color: #FFCF00; }
 }
 #navlist > li {
   margin: 0;
-  padding: 0 0.2em 0;
+  padding: 0.2em;
   border-bottom: 3px solid #000000;
-  font-weight: bold;
-}
-#navlist > li > a {
-  display: block;
-  text-decoration: none;
-  width: 100%;
-  padding: 0.3em 0;
+  text-transform: uppercase;
 }
 #navlist > li:hover,
-#navlist > li:active,
-#navlist > li:hover > a,
-#navlist > li:active > a,
-#navlist > li > a:hover,
-#navlist > li > a:active {
+#navlist > li:active {
   background-color: #FFCF00;
   color: #000000;
 }
 
-#navlist > li.active,
-#navlist > li.active > a {
+#navlist > li.active {
   background-color: #008484;
   color: #FFCF00;
+  outline: none;
 }
 
-#navPos, #navPos > a {
+#navPos {
   background-color: #FF9F00;
   color: #000000;
 }
-#navGrav, #navGrav > a {
+#navGrav {
   background-color: #C09070;
   color: #000000;
 }
-#navAcou, #navAcou > a {
+#navAcou {
   background-color: #6000CF;
   color: #000000;
 }
@@ -159,21 +149,32 @@ a:hover, a:active { color: #FFCF00; }
 #sideRemark {
   background-color: #E7ADE7;
   color: #000000;
-  width: 120px;
-  font-size: 10px;
-  text-align: center;
+  width: 70px;
   position: absolute;
   bottom: 0px;
-  height: 40px;
+  height: 2em;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
-#sideRemark a:link, #sideRemark a:visited { color: #000000; }
-#sideRemark a:hover, #sideRemark a:active { color: #008484; }
+#sideRemark > li {
+  text-transform: uppercase;
+  padding-top: .25em;
+  padding-left: .2em;
+  height: 1.75em;
+  margin: 0;
+}
+#sideRemark > li:hover,
+#sideRemark > li:active {
+  background-color: #FFCF00;
+  color: #000000;
+}
 
 #mainarea {
   position: absolute;
   top: 3px;
   bottom: 3px;
-  left: 145px;
+  left: 95px;
   right: 3px;
   width: auto;
   padding: 1px;
@@ -187,7 +188,7 @@ a:hover, a:active { color: #FFCF00; }
   font-size: 3em;
   font-weight: bold;
   line-height: .8em;
-  height: 102px;
+  height: 82px;
   text-align: center;
 }
 
@@ -206,7 +207,7 @@ a:hover, a:active { color: #FFCF00; }
 
 #mainContent {
   position: absolute;
-  top: 129px;
+  top: 109px;
   bottom: 0px;
   left: 0px;
   right: 1px;
@@ -229,4 +230,47 @@ section.active {
 
 .gravVal {
   text-align: right;
+}
+
+@media screen and (min-width: 500px) {
+  body {
+    font-size: 24px;
+  }
+  #sidebar {
+    width: 140px;
+  }
+  #sideTop {
+    width: 120px;
+    height: 80px;
+  }
+  #sideSepTop {
+    width: 140px;
+  }
+  #sideSepTopInsert {
+    margin-left: 120px;
+  }
+  #sideSepBottom {
+    width: 140px;
+  }
+  #sideSepBottomInsert {
+    margin-left: 120px;
+  }
+  #sideBottom {
+    width: 120px;
+    top: 179px;
+    bottom: 40px;
+  }
+  #sideRemark {
+    width: 120px;
+    height: 40px;
+  }
+  #mainarea {
+    left: 145px;
+  }
+  #mainHeader {
+    height: 102px;
+  }
+  #mainContent {
+    top: 129px;
+  }
 }
