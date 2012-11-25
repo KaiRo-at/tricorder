@@ -100,14 +100,20 @@ var gModPos = {
         },
         function(error) {
           // See https://developer.mozilla.org/en/Using_geolocation#Handling_errors
-          document.getElementById("posLat").textContent = error.message;
-          document.getElementById("posLong").textContent = "...";
-          document.getElementById("posAlt").textContent = "...";
-          document.getElementById("posAcc").textContent = "...";
-          document.getElementById("posAltAcc").textContent = "...";
-          document.getElementById("posHead").textContent = "...";
-          document.getElementById("posSpd").textContent = "...";
-          document.getElementById("posTime").textContent = "...";
+          if (error.message) {
+            document.getElementById("posLat").textContent = error.message;
+            document.getElementById("posLong").textContent = "...";
+            document.getElementById("posAlt").textContent = "...";
+            document.getElementById("posAcc").textContent = "...";
+            document.getElementById("posAltAcc").textContent = "...";
+            document.getElementById("posHead").textContent = "...";
+            document.getElementById("posSpd").textContent = "...";
+            document.getElementById("posTime").textContent = "...";
+          }
+          else {
+            document.getElementById("posunavail").style.display = "block";
+            document.getElementById("posavail").style.display = "none";
+          }
         },
         {enableHighAccuracy: true}
       );
@@ -143,6 +149,12 @@ var gModGrav = {
     document.getElementById("gravavail").style.display = "block";
     window.addEventListener("deviceorientation", this.orientEvent, true);
     window.addEventListener("devicemotion", this.motionEvent, true);
+    setTimeout(function() {
+      if ((document.getElementById("gravAlpha").textContent == "...") &&
+          (document.getElementById("gravX").textContent == "...")) {
+        gModGrav.deactivate();
+      }
+    }, 3000);
   },
   deactivate: function() {
     gSounds.scan.pause();
@@ -150,6 +162,14 @@ var gModGrav = {
     window.removeEventListener("devicemotion", this.motionEvent, true);
     document.getElementById("gravunavail").style.display = "block";
     document.getElementById("gravavail").style.display = "none";
+    //document.getElementById("gravAbs").textContent = "...";
+    document.getElementById("gravAlpha").textContent = "...";
+    document.getElementById("gravBeta").textContent = "...";
+    document.getElementById("gravGamma").textContent = "...";
+    document.getElementById("gravX").textContent = "...";
+    document.getElementById("gravY").textContent = "...";
+    document.getElementById("gravZ").textContent = "...";
+    //document.getElementById("gravRot").textContent = "...";
   },
   orientEvent: function(orientData) {
     //document.getElementById("gravAbs").textContent = orientData.absolute;
