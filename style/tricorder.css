@@ -228,8 +228,20 @@ section.active {
   display: block;
 }
 
-.gravVal {
+.posVal, .gravVal {
   text-align: right;
+}
+
+.posVal {
+  width: 24ch;
+}
+
+.gravVal {
+  width: 10ch;
+}
+
+.note {
+  font-size: .667em;
 }
 
 @media screen and (min-width: 500px) {

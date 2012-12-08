@@ -88,13 +88,20 @@ var gModPos = {
       document.getElementById("posavail").style.display = "block";
       this.watchID = navigator.geolocation.watchPosition(
         function(position) {
-           document.getElementById("posLat").textContent = position.coords.latitude;
-           document.getElementById("posLong").textContent = position.coords.longitude;
-           document.getElementById("posAlt").textContent = position.coords.altitude;
-           document.getElementById("posAcc").textContent = position.coords.accuracy;
-           document.getElementById("posAltAcc").textContent = position.coords.altitudeAccuracy;
-           document.getElementById("posHead").textContent = position.coords.heading || "---";
-           document.getElementById("posSpd").textContent = position.coords.speed || "---";
+           document.getElementById("posLat").textContent =
+               position.coords.latitude + "°";
+           document.getElementById("posLong").textContent =
+               position.coords.longitude + "°";
+           document.getElementById("posAlt").textContent =
+               position.coords.altitude.toFixed(0) + " m";
+           document.getElementById("posAcc").textContent =
+               position.coords.accuracy.toFixed(0) + " m";
+           document.getElementById("posAltAcc").textContent =
+               position.coords.altitudeAccuracy.toFixed(0) + " m";
+           document.getElementById("posHead").textContent =
+               position.coords.heading ? position.coords.heading.toFixed(0) + "°" : "---";
+           document.getElementById("posSpd").textContent =
+               position.coords.speed ? position.coords.speed.toFixed(1) + " m/s" : "---";
            var locTime = new Date(position.timestamp);
            document.getElementById("posTime").textContent = locTime.toISOString();
         },
@@ -166,6 +173,7 @@ var gModGrav = {
     document.getElementById("gravAlpha").textContent = "...";
     document.getElementById("gravBeta").textContent = "...";
     document.getElementById("gravGamma").textContent = "...";
+    document.getElementById("gravTotal").textContent = "...";
     document.getElementById("gravX").textContent = "...";
     document.getElementById("gravY").textContent = "...";
     document.getElementById("gravZ").textContent = "...";
@@ -178,6 +186,11 @@ var gModGrav = {
     document.getElementById("gravGamma").textContent = orientData.gamma.toFixed(1) + "°";
   },
   motionEvent: function(event) {
+    var gravTotal = 
+        Math.sqrt(Math.pow(event.accelerationIncludingGravity.x, 2) +
+                  Math.pow(event.accelerationIncludingGravity.y, 2) +
+                  Math.pow(event.accelerationIncludingGravity.z, 2));
+    document.getElementById("gravTotal").textContent = gravTotal.toFixed(2) + " m/s²";
     document.getElementById("gravX").textContent = event.accelerationIncludingGravity.x.toFixed(2) + " m/s²";
     document.getElementById("gravY").textContent = event.accelerationIncludingGravity.y.toFixed(2) + " m/s²";
     document.getElementById("gravZ").textContent = event.accelerationIncludingGravity.z.toFixed(2) + " m/s²";
