@@ -84,7 +84,7 @@ a:hover, a:active { color: #FFCF00; }
   border-radius: 0px 0px 0px 15px;
 }
 #sideSepBottom {
-  background-color: #008484;
+  background-color: #6080F0;
   width: 90px;
   height: 50px;
   margin-bottom: 3px;
@@ -141,7 +141,7 @@ a:hover, a:active { color: #FFCF00; }
   background-color: #C09070;
   color: #000000;
 }
-#navAcou {
+#navOther {
   background-color: #6000CF;
   color: #000000;
 }
