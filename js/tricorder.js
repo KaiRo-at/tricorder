@@ -185,7 +185,7 @@ var gModGrav = {
   },
 }
 
-var gModAcou = {
+var gModOther = {
   activate: function() {
     //gSounds.scan.play();
   },
