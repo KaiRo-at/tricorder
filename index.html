@@ -34,7 +34,7 @@
 <ul id="navlist">
 <li id="navPos" onclick="switchModule('Pos');">Position</li>
 <li id="navGrav" onclick="switchModule('Grav');">Gravity</li>
-<li id="navAcou" onclick="switchModule('Acou');">Acoustics</li>
+<li id="navOther" onclick="switchModule('Other');">Other</li>
 </ul>
 </div>
 
@@ -64,15 +64,18 @@ a better device.
 </p>
 <div id="posavail" style="display:none">
 <table>
-<tr><td>Latitude:</td><td id="posLat">...</td></tr>
-<tr><td>Longitude:</td><td id="posLong">...</td></tr>
-<tr><td>Accuracy:</td><td id="posAcc">...</td></tr>
-<tr><td>Altitude:</td><td id="posAlt">...</td></tr>
-<tr><td>Alt. Accuracy:</td><td id="posAltAcc">...</td></tr>
-<tr><td>Heading:</td><td id="posHead">...</td></tr>
-<tr><td>Speed:</td><td id="posSpd">...</td></tr>
-<tr><td>Timestamp:</td><td id="posTime">...</td></tr>
+<tr><td>Latitude:</td><td id="posLat" class="posVal">...</td></tr>
+<tr><td>Longitude:</td><td id="posLong" class="posVal">...</td></tr>
+<tr><td>Accuracy:</td><td id="posAcc" class="posVal">...</td></tr>
+<tr><td>Altitude:</td><td id="posAlt" class="posVal">...</td></tr>
+<tr><td>Alt. Accuracy:</td><td id="posAltAcc" class="posVal">...</td></tr>
+<tr><td>Heading:</td><td id="posHead" class="posVal">...</td></tr>
+<tr><td>Speed:</td><td id="posSpd" class="posVal">...</td></tr>
+<tr><td>Timestamp:</td><td id="posTime" class="posVal">...</td></tr>
 </table>
+<p class="note">
+All coordinates use the WGS84 coordinate system.
+</p>
 </div>
 </section>
 
@@ -84,6 +87,7 @@ a better device.
 </p>
 <div id="gravavail" style="display:none">
 <table>
+<tr><td>Total:</td><td id="gravTotal" class="gravVal">...</td></tr>
 <tr><td>X:</td><td id="gravX" class="gravVal">...</td></tr>
 <tr><td>Y:</td><td id="gravY" class="gravVal">...</td></tr>
 <tr><td>Z:</td><td id="gravZ" class="gravVal">...</td></tr>
@@ -94,10 +98,10 @@ a better device.
 </div>
 </section>
 
-<section id="sectAcou">
-<p>This tricorder model doesn't have an acoustics sensors yet, please contact
-the Starfleet science department if you want to help developing this for future
-models.</p>
+<section id="sectOther">
+<p>This tricorder model doesn't have other sensors yet, please contact
+the <a href="http://www.kairo.at/apps">Starfleet science department</a>
+if you want to help developing this for future models.</p>
 </section>
 </div>
 

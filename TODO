@@ -1,4 +1,18 @@
 Tasks to complete for Web Tricorder:
 
-* Make more sensors work
+* Make more sensors work - see https://wiki.mozilla.org/WebAPI
+** Networks (probably need ceritified app!)
+*** Current connection: http://dvcs.w3.org/hg/dap/raw-file/tip/network-api/Overview.html
+*** Mobile Networks: https://wiki.mozilla.org/WebAPI/WebMobileConnection
+*** WiFi Networks: http://groups.google.com/group/mozilla.dev.webapi/browse_thread/thread/ed980c42261c5f4a
+*** Nearby Bluetooth devices: https://wiki.mozilla.org/WebAPI/WebBluetooth
+** Device properties:
+*** Battery Status: http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html
+*** Storage: https://github.com/mozilla-b2g/gaia/blob/master/apps/settings/js/app_storage.js
+** Environment:
+*** Ambient Light: http://www.w3.org/TR/ambient-light/
+*** Proximity: http://www.w3.org/TR/2012/WD-proximity-20120712/
+** Audio / Video analysis
+*** histograms, etc.
+*** via WebRTC: https://wiki.mozilla.org/Platform/Features/VideoConferencing
 * Make output more beautiful
