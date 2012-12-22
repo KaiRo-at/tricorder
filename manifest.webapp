@@ -2,6 +2,11 @@
   "name": "Tricorder",
   "description": "Display data from your device sensors in Star Trek style.",
   "launch_path": "/index.html",
+  "permissions": {
+    "geolocation": {
+      "description": "Determine the global position to display in the tricorder."
+    }
+  },
   "developer": {
     "name": "Robert Kaiser",
     "url": "http://www.kairo.at/"
