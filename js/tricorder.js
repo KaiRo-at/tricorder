@@ -74,8 +74,11 @@ function switchModule(modname) {
     navs[i].classList.remove("active");
   }
 
-  document.getElementById("nav" + modname).classList.add("active");
+  var navItem = document.getElementById("nav" + modname);
+  navItem.classList.add("active");
   document.getElementById("sect" + modname).classList.add("active");
+  document.getElementById("mainHeader").textContent =
+      (modname == "Other") ? "Web Tricorder" : navItem.textContent;
 
   window["gMod" + modname].activate();
 }

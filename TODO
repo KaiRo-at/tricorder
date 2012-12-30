@@ -1,7 +1,7 @@
 Tasks to complete for Web Tricorder:
 
 * Make more sensors work - see https://wiki.mozilla.org/WebAPI
-** Networks (probably need ceritified app!)
+** Networks (probably need certified app!)
 *** Current connection: http://dvcs.w3.org/hg/dap/raw-file/tip/network-api/Overview.html
 *** Mobile Networks: https://wiki.mozilla.org/WebAPI/WebMobileConnection
 *** WiFi Networks: http://groups.google.com/group/mozilla.dev.webapi/browse_thread/thread/ed980c42261c5f4a
