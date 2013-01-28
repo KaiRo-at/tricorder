@@ -125,6 +125,7 @@ var gModPos = {
             document.getElementById("posunavail").style.display = "block";
             document.getElementById("posavail").style.display = "none";
           }
+          gSounds.scan.pause();
         },
         {enableHighAccuracy: true, maximumAge: 10000, timeout: 60000}
       );
