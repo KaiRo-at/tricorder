@@ -119,13 +119,14 @@ var gModPos = {
             document.getElementById("posHead").textContent = "...";
             document.getElementById("posSpd").textContent = "...";
             document.getElementById("posTime").textContent = "...";
+            setTimeout(function() { gModPos.deactivate(); }, 5000);
           }
           else {
             document.getElementById("posunavail").style.display = "block";
             document.getElementById("posavail").style.display = "none";
           }
         },
-        {enableHighAccuracy: true}
+        {enableHighAccuracy: true, maximumAge: 10000, timeout: 60000}
       );
     }
     else {

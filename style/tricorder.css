@@ -179,7 +179,7 @@ a:hover, a:active { color: #FFCF00; }
   width: auto;
   padding: 1px;
   min-height: 20em;
-  overflow: none;
+  overflow: hidden;
   border: none;
 }
 
