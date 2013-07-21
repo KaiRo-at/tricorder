@@ -11,7 +11,7 @@ Tasks to complete for Web Tricorder:
 *** Storage: https://github.com/mozilla-b2g/gaia/blob/master/apps/settings/js/app_storage.js
 ** Environment:
 *** Ambient Light: http://www.w3.org/TR/ambient-light/
-*** Proximity: http://www.w3.org/TR/2012/WD-proximity-20120712/
+*** Proximity: http://www.w3.org/TR/2012/WD-proximity-20120712/ - https://hacks.mozilla.org/2013/06/the-proximity-api/
 ** Audio / Video analysis
 *** histograms, etc.
 *** via WebRTC: https://wiki.mozilla.org/Platform/Features/VideoConferencing
