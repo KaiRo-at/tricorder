@@ -4,7 +4,7 @@
   "version": "0.DVER",
   "size": "PKGSIZE",
   "developer": {
-    "name": "Robert Kaiser"
+    "name": "Robert Kaiser",
     "url": "http://www.kairo.at/"
   }
 }
