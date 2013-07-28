@@ -14,6 +14,17 @@ window.onload = function() {
   gSounds.keyaction = new Audio("sound/key-action.opus");
   gSounds.keypress = new Audio("sound/key-press.opus");
 
+  document.getElementById("fullScreenButton").addEventListener("click",
+      function(aEvent) { toggleFullscreen(); }, false);
+
+  var navItems = document.getElementById("navlist").children;
+  for (var i = 0; i <= navItems.length - 1; i++) {
+    navItems[i].addEventListener("click",
+        function(aEvent) {
+          switchModule(aEvent.target.id.replace("nav", ""));
+        }, false);
+  }
+
   gSounds.launch.play();
   window.addEventListener("beforeunload", function( event ) {
     gSounds.shutdown.play();
@@ -60,7 +71,7 @@ function toggleFullscreen() {
   }
 }
 
-function switchModule(modname) {
+function switchModule(aModname) {
   gSounds.keyaction.play();
   var sections = document.getElementsByTagName('section');
   for (var i = 0; i <= sections.length - 1; i++) {
@@ -74,13 +85,13 @@ function switchModule(modname) {
     navs[i].classList.remove("active");
   }
 
-  var navItem = document.getElementById("nav" + modname);
+  var navItem = document.getElementById("nav" + aModname);
   navItem.classList.add("active");
-  document.getElementById("sect" + modname).classList.add("active");
+  document.getElementById("sect" + aModname).classList.add("active");
   document.getElementById("mainHeader").textContent =
-      (modname == "Other") ? "Web Tricorder" : navItem.textContent;
+      (aModname == "Other") ? "Web Tricorder" : navItem.textContent;
 
-  window["gMod" + modname].activate();
+  window["gMod" + aModname].activate();
 }
 
 var gModPos = {
@@ -200,6 +211,35 @@ var gModGrav = {
     document.getElementById("gravY").textContent = event.accelerationIncludingGravity.y.toFixed(2) + " m/s²";
     document.getElementById("gravZ").textContent = event.accelerationIncludingGravity.z.toFixed(2) + " m/s²";
     //document.getElementById("gravRot").textContent = event.rotationRate;
+  },
+}
+
+
+var gModDev = {
+  activate: function() {
+    gSounds.scan.play();
+    this.batteryTimer =
+        setInterval(function () { gModDev.updateBattery(); }, 100);
+  },
+  deactivate: function() {
+    clearTimeout(this.batteryTimer);
+    gSounds.scan.pause();
+  },
+  updateBattery: function() {
+    document.getElementById("devBattLevel").textContent = (navigator.battery.level * 100).toFixed(1) + "%";
+    document.getElementById("devBattStatus").textContent = 
+        navigator.battery.charging ? "charging, " + navigator.battery.chargingTime + "s remaining"
+                                   : navigator.battery.dischargingTime + "s usage remaining";
+  },
+  batteryTimer: null,
+}
+
+var gModNull = {
+  activate: function() {
+    //gSounds.scan.play();
+  },
+  deactivate: function() {
+    gSounds.scan.pause();
   },
 }
 

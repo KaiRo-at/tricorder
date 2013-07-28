@@ -32,14 +32,15 @@
 
 <div id="sideBottom">
 <ul id="navlist">
-<li id="navPos" onclick="switchModule('Pos');">Position</li>
-<li id="navGrav" onclick="switchModule('Grav');">Gravity</li>
-<li id="navOther" onclick="switchModule('Other');">Other</li>
+<li id="navPos">Position</li>
+<li id="navGrav">Gravity</li>
+<li id="navDev">Device</li>
+<li id="navOther">Other</li>
 </ul>
 </div>
 
 <ul id="sideRemark">
-<li onclick="toggleFullscreen();">Full Screen</li>
+<li id="fullScreenButton">Full Screen</li>
 </ul>
 </div>
 
@@ -96,6 +97,14 @@ a better device.
 <tr><td>Gamma:</td><td id="gravGamma" class="gravVal">...</td></tr>
 </table>
 </div>
+</section>
+
+<section id="sectDev">
+<table>
+<tr><td>Battery Level:</td><td id="devBattLevel" class="deviceVal">...</td></tr>
+<tr><td>Battery Status:</td><td id="devBattStatus" class="deviceVal">...</td></tr>
+<!-- to come : storage data -->
+</table>
 </section>
 
 <section id="sectOther">
