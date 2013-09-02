@@ -226,10 +226,28 @@ var gModDev = {
     gSounds.scan.pause();
   },
   updateBattery: function() {
-    document.getElementById("devBattLevel").textContent = (navigator.battery.level * 100).toFixed(1) + "%";
-    document.getElementById("devBattStatus").textContent = 
-        navigator.battery.charging ? "charging, " + navigator.battery.chargingTime + "s remaining"
-                                   : navigator.battery.dischargingTime + "s usage remaining";
+    document.getElementById("devBattLevel").textContent =
+        (navigator.battery.level * 100).toFixed(1) + "%";
+    if (navigator.battery.charging) {
+      if (navigator.battery.chargingTime == 0 ||
+          navigator.battery.chargingTime == Infinity) {
+        document.getElementById("devBattStatus").textContent = "charging";
+      }
+      else {
+        document.getElementById("devBattStatus").textContent = 
+            "charging, " + navigator.battery.chargingTime + "s remaining";
+      }
+    }
+    else {
+      if (navigator.battery.dischargingTime == 0 ||
+          navigator.battery.dischargingTime == Infinity) {
+        document.getElementById("devBattStatus").textContent = "discharging";
+      }
+      else {
+        document.getElementById("devBattStatus").textContent = 
+            navigator.battery.dischargingTime + "s usage remaining";
+      }
+    }
   },
   batteryTimer: null,
 }
