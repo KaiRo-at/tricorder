@@ -32,13 +32,20 @@ window.onload = function() {
 }
 
 function updateStardate() {
+  // Stardate rules foggy at best. See http://en.wikipedia.org/wiki/Stardate
+  // and the Memory Alpha article linked there for more details.
+  // We roughly lean on TNG scale by splitting an Earth year into exactly 1000
+  // units, but we put the 0 point at the TV premiere of The Original Series.
   if (!gStardate)
     gStardate = document.getElementById("stardate");
 
   var curDate = new Date();
 
   if (!gSDBase)
-    gSDBase = new Date("September 8, 1966 20:00:00 EST");
+    // Star Trek premiered on Thursday, September 8, 1966, at 7:30PM or 8:30PM
+    // depending on time zone in the United States.
+    // See http://www.startrek.com/article/star-trek-and-newspapers-part-2
+    gSDBase = new Date("September 8, 1966 19:30:00 EST");
 
   var sdateval = (curDate - gSDBase) / (86400 * 365.2425);
   gStardate.textContent = sdateval.toFixed(1);
