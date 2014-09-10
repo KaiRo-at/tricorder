@@ -37,8 +37,10 @@ function updateStardate() {
 
   var curDate = new Date();
 
+  // Star Trek famously premiered on Thursday, September 8, 1966, at 8:30 p.m.
+  // See http://www.startrek.com/article/what-if-the-original-star-trek-had-debuted-on-friday-nights
   if (!gSDBase)
-    gSDBase = new Date("September 8, 1966 20:00:00 EST");
+    gSDBase = new Date("September 8, 1966 20:30:00 EST");
 
   var sdateval = (curDate - gSDBase) / (86400 * 365.2425);
   gStardate.textContent = sdateval.toFixed(1);
@@ -252,10 +254,11 @@ var gModDev = {
   batteryTimer: null,
 }
 
-var gModNull = {
+var gModSound = {
   activate: function() {
     //gSounds.scan.play();
   },
+  // getUserMedia ("WebRTC") + MediaElementAudioSourceNode (WebAudio)
   deactivate: function() {
     gSounds.scan.pause();
   },
