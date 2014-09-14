@@ -281,8 +281,10 @@ var gModSound = {
       window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
   },
   deactivate: function() {
-    gModSound.mDisplay.active = false;
-    gModSound.mAudio.stream.stop();
+    if (gModSound.mDisplay.active) {
+      gModSound.mAudio.stream.stop();
+      gModSound.mDisplay.active = false;
+    }
     gSounds.scan.pause();
   },
 }
