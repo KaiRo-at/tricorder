@@ -5,6 +5,8 @@
 var gStardate, gSDBase;
 var gSounds = {};
 
+navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
 window.onload = function() {
   setTimeout(updateStardate, 0);
   gSounds.scan = new Audio("sound/scan.opus");
@@ -216,6 +218,74 @@ var gModGrav = {
   },
 }
 
+var gModSound = {
+  activate: function() {
+    //gSounds.scan.play();
+    if (navigator.getUserMedia) {
+      document.getElementById("soundunavail").style.display = "none";
+      document.getElementById("soundavail").style.display = "block";
+      navigator.getUserMedia({ audio: true },
+         function(aLocalMediaStream) {
+           gModSound.mAudio.stream = aLocalMediaStream;
+           gModSound.mAudio.context = new (window.AudioContext || window.webkitAudioContext)();
+           gModSound.mAudio.input = gModSound.mAudio.context.createMediaStreamSource(gModSound.mAudio.stream);
+           // Could put a filter in between like in http://webaudioapi.com/samples/microphone/
+           gModSound.mDisplay.canvas = document.getElementById("soundcanvas");
+           gModSound.mDisplay.context = gModSound.mDisplay.canvas.getContext("2d");
+           gModSound.mDisplay.canvas.height = document.getElementById("soundavail").clientHeight - 2;
+           gModSound.mDisplay.canvas.width = document.getElementById("soundavail").clientWidth;
+           gModSound.mAudio.frequencySlices = (gModSound.mDisplay.canvas.width > 512) ?
+                                              512 :
+                                              Math.pow(2, Math.floor(Math.log(gModSound.mDisplay.canvas.width) / Math.LN2));
+           console.log("slices: " + gModSound.mAudio.frequencySlices);
+           gModSound.mAudio.analyzer = gModSound.mAudio.context.createAnalyser();
+           // Make the FFT four times as large as needed as the upper three quarters turn out to be useless.
+           gModSound.mAudio.analyzer.fftSize = gModSound.mAudio.frequencySlices * 4;
+           console.log("FFT: " + gModSound.mAudio.analyzer.fftSize);
+           gModSound.mAudio.input.connect(gModSound.mAudio.analyzer);
+           gModSound.mDisplay.context.setTransform(1, 0, 0, -(gModSound.mDisplay.canvas.height/256), 0, gModSound.mDisplay.canvas.height);
+           gModSound.mDisplay.active = true;
+           window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
+         },
+         function(err) {
+           document.getElementById("soundunavail").style.display = "block";
+           document.getElementById("soundavail").style.display = "none";
+           console.log(err);
+         }
+      );
+    }
+    else {
+      document.getElementById("soundunavail").style.display = "block";
+      document.getElementById("soundavail").style.display = "none";
+    }
+  },
+  mAudio: {
+    frequencySlices: 32, // Must be a multiple of 2 (see AnalyserNode.fftSize)
+  },
+  mDisplay: {
+    active: false,
+  },
+  paintAnalyzerFrame: function(aTimestamp) {
+    var data = new Uint8Array(gModSound.mAudio.frequencySlices);
+    gModSound.mAudio.analyzer.getByteFrequencyData(data);
+    gModSound.mDisplay.context.clearRect(0, 0, gModSound.mDisplay.canvas.width, gModSound.mDisplay.canvas.height);
+    // Out of experience, only the first half of the slices are actually useful.
+    var wid = gModSound.mDisplay.canvas.width / gModSound.mAudio.frequencySlices;
+    var fill = "#9C9CFF";
+    for (var i = 0; i < gModSound.mAudio.frequencySlices; ++i) {
+      var newFill = (data[i] > 200) ? "#FF0000" : ((data[i] > 100) ? "#FFCF00" : "#9C9CFF");
+      if (fill != newFill) { gModSound.mDisplay.context.fillStyle = newFill; fill = newFill; }
+      gModSound.mDisplay.context.fillRect(i*wid, 0, wid, data[i]);
+    }
+    if (gModSound.mDisplay.active)
+      window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
+  },
+  deactivate: function() {
+    gModSound.mDisplay.active = false;
+    gModSound.mAudio.stream.stop();
+    gSounds.scan.pause();
+  },
+}
 
 var gModDev = {
   activate: function() {
@@ -252,16 +322,6 @@ var gModDev = {
     }
   },
   batteryTimer: null,
-}
-
-var gModSound = {
-  activate: function() {
-    //gSounds.scan.play();
-  },
-  // getUserMedia ("WebRTC") + MediaElementAudioSourceNode (WebAudio)
-  deactivate: function() {
-    gSounds.scan.pause();
-  },
 }
 
 var gModOther = {
