@@ -1,6 +1,7 @@
 {
   "name": "Tricorder",
   "description": "Display data from your device sensors in Star Trek style.",
+  "version": "1.DVER",
   "launch_path": "/index.html",
   "permissions": {
     "geolocation": {

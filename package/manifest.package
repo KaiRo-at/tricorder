@@ -1,7 +1,7 @@
 {
   "name": "Tricorder",
   "package_path": "http://tricorder.kairo.at/package.zip",
-  "version": "0.DVER",
+  "version": "1.DVER",
   "size": "PKGSIZE",
   "developer": {
     "name": "Robert Kaiser",
