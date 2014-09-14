@@ -7,12 +7,10 @@ Tasks to complete for Web Tricorder:
 *** WiFi Networks: http://groups.google.com/group/mozilla.dev.webapi/browse_thread/thread/ed980c42261c5f4a
 *** Nearby Bluetooth devices: https://wiki.mozilla.org/WebAPI/WebBluetooth
 ** Device properties:
-*** Battery Status: http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html
 *** Storage: https://github.com/mozilla-b2g/gaia/blob/master/apps/settings/js/app_storage.js
 ** Environment:
 *** Ambient Light: http://www.w3.org/TR/ambient-light/
 *** Proximity: http://www.w3.org/TR/2012/WD-proximity-20120712/ - https://hacks.mozilla.org/2013/06/the-proximity-api/
-** Audio / Video analysis
+** Video analysis
 *** histograms, etc.
-*** via WebRTC: https://wiki.mozilla.org/Platform/Features/VideoConferencing
 * Make output more beautiful
