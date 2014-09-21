@@ -237,6 +237,11 @@ section.active {
   display: block;
 }
 
+section > p:first-child {
+  margin-top: 0;
+  padding-top: 1em;
+}
+
 .posVal, .gravVal {
   text-align: right;
 }

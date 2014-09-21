@@ -33,6 +33,12 @@ window.onload = function() {
   }, false);
 }
 
+window.onresize = function() {
+  if (document.getElementById("sectSound").classList.contains("active")) {
+    gModSound.resize();
+  }
+}
+
 function updateStardate() {
   if (!gStardate)
     gStardate = document.getElementById("stardate");
@@ -221,7 +227,7 @@ var gModGrav = {
 var gModSound = {
   activate: function() {
     //gSounds.scan.play();
-    if (navigator.getUserMedia) {
+    if (navigator.getUserMedia && (window.AudioContext || window.webkitAudioContext)) {
       document.getElementById("soundunavail").style.display = "none";
       document.getElementById("soundavail").style.display = "block";
       navigator.getUserMedia({ audio: true },
@@ -232,20 +238,7 @@ var gModSound = {
            // Could put a filter in between like in http://webaudioapi.com/samples/microphone/
            gModSound.mDisplay.canvas = document.getElementById("soundcanvas");
            gModSound.mDisplay.context = gModSound.mDisplay.canvas.getContext("2d");
-           gModSound.mDisplay.canvas.height = document.getElementById("soundavail").clientHeight - 2;
-           gModSound.mDisplay.canvas.width = document.getElementById("soundavail").clientWidth;
-           gModSound.mAudio.frequencySlices = (gModSound.mDisplay.canvas.width > 512) ?
-                                              512 :
-                                              Math.pow(2, Math.floor(Math.log(gModSound.mDisplay.canvas.width) / Math.LN2));
-           console.log("slices: " + gModSound.mAudio.frequencySlices);
-           gModSound.mAudio.analyzer = gModSound.mAudio.context.createAnalyser();
-           // Make the FFT four times as large as needed as the upper three quarters turn out to be useless.
-           gModSound.mAudio.analyzer.fftSize = gModSound.mAudio.frequencySlices * 4;
-           console.log("FFT: " + gModSound.mAudio.analyzer.fftSize);
-           gModSound.mAudio.input.connect(gModSound.mAudio.analyzer);
-           gModSound.mDisplay.context.setTransform(1, 0, 0, -(gModSound.mDisplay.canvas.height/256), 0, gModSound.mDisplay.canvas.height);
-           gModSound.mDisplay.active = true;
-           window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
+           gModSound.rebuildCanvas();
          },
          function(err) {
            document.getElementById("soundunavail").style.display = "block";
@@ -258,6 +251,26 @@ var gModSound = {
       document.getElementById("soundunavail").style.display = "block";
       document.getElementById("soundavail").style.display = "none";
     }
+  },
+  rebuildCanvas: function() {
+    if (gModSound.mDisplay.AFRequestID) {
+      window.cancelAnimationFrame(gModSound.mDisplay.AFRequestID);
+      gModSound.mDisplay.AFRequestID = 0;
+    }
+    gModSound.mDisplay.canvas.height = document.getElementById("soundavail").clientHeight - 4;
+    gModSound.mDisplay.canvas.width = document.getElementById("soundavail").clientWidth;
+    gModSound.mAudio.frequencySlices = (gModSound.mDisplay.canvas.width > 512) ?
+                                      512 :
+                                      Math.pow(2, Math.floor(Math.log(gModSound.mDisplay.canvas.width) / Math.LN2));
+    //console.log("slices: " + gModSound.mAudio.frequencySlices);
+    gModSound.mAudio.analyzer = gModSound.mAudio.context.createAnalyser();
+    // Make the FFT four times as large as needed as the upper three quarters turn out to be useless.
+    gModSound.mAudio.analyzer.fftSize = gModSound.mAudio.frequencySlices * 4;
+    //console.log("FFT: " + gModSound.mAudio.analyzer.fftSize);
+    gModSound.mAudio.input.connect(gModSound.mAudio.analyzer);
+    gModSound.mDisplay.context.setTransform(1, 0, 0, -(gModSound.mDisplay.canvas.height/256), 0, gModSound.mDisplay.canvas.height);
+    gModSound.mDisplay.active = true;
+    gModSound.mDisplay.AFRequestID = window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
   },
   mAudio: {
     frequencySlices: 32, // Must be a multiple of 2 (see AnalyserNode.fftSize)
@@ -278,7 +291,10 @@ var gModSound = {
       gModSound.mDisplay.context.fillRect(i*wid, 0, wid, data[i]);
     }
     if (gModSound.mDisplay.active)
-      window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
+      gModSound.mDisplay.AFRequestID = window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
+  },
+  resize: function() {
+    gModSound.rebuildCanvas();
   },
   deactivate: function() {
     if (gModSound.mDisplay.active) {

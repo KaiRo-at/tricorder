@@ -7,6 +7,9 @@
     "geolocation": {
       "description": "Determine the global position to display in the tricorder."
     }
+    "audio-capture": {
+      "description": "Capture microphone audio for the sound module."
+    }
   },
   "developer": {
     "name": "Robert Kaiser",
