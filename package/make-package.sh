@@ -13,6 +13,6 @@ sed -e "s/DVER/$dver/" -e "s/PKGSIZE/$pkgsize/" package/manifest.package > $pkgd
 sed -e "s/DVER/$dver/" -e "s/PKGSIZE/$pkgsize/" manifest.webapp > $pkgdir/manifest.webapp
 cd $pkgdir
 zip -f -0 package.zip manifest.webapp
-rm manifest.webapp
+rm -v manifest.webapp
 cd $origdir
 cp package/.htaccess $pkgdir/
