@@ -1,10 +1,14 @@
 {
   "name": "Tricorder",
   "description": "Display data from your device sensors in Star Trek style.",
+  "version": "1.DVER",
   "launch_path": "/index.html",
   "permissions": {
     "geolocation": {
       "description": "Determine the global position to display in the tricorder."
+    },
+    "audio-capture": {
+      "description": "Capture microphone audio for the sound module."
     }
   },
   "developer": {

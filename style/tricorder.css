@@ -141,6 +141,14 @@ a:hover, a:active { color: #FFCF00; }
   background-color: #C09070;
   color: #000000;
 }
+#navSound {
+  background-color: #E7ADE7;
+  color: #000000;
+}
+#navDev {
+  background-color: #A09090;
+  color: #000000;
+}
 #navOther {
   background-color: #6000CF;
   color: #000000;
@@ -222,10 +230,16 @@ a:hover, a:active { color: #FFCF00; }
 section {
   display: none;
   background-color: rgba(0,0,0,0.8);
+  height: 100%;
 }
 
 section.active {
   display: block;
+}
+
+section > p:first-child {
+  margin-top: 0;
+  padding-top: 1em;
 }
 
 .posVal, .gravVal {
@@ -242,6 +256,10 @@ section.active {
 
 .note {
   font-size: .667em;
+}
+
+#soundavail {
+  height: 100%;
 }
 
 @media screen and (min-width: 500px) {
