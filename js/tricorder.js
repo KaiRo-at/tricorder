@@ -40,6 +40,10 @@ window.onresize = function() {
 }
 
 function updateStardate() {
+  // Stardate rules foggy at best. See http://en.wikipedia.org/wiki/Stardate
+  // and the Memory Alpha article linked there for more details.
+  // We roughly lean on TNG scale by splitting an Earth year into exactly 1000
+  // units, but we put the 0 point at the TV premiere of The Original Series.
   if (!gStardate)
     gStardate = document.getElementById("stardate");
 
