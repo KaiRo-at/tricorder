@@ -1,11 +1,15 @@
 CACHE MANIFEST
 
-# 2013-01-28.
+# 2014-11-13
 manifest.webapp
 js/tricorder.js
+sound/key-action.opus
+sound/key-press.opus
+sound/launch.opus
+sound/scan.opus
+sound/shutdown.opus
 style/tricorder.css
-style/DejaVuSansCondensed.ttf
-style/DejaVuSansCondensed-Bold.ttf
+style/OSPDIN.ttf
 style/tilex16.png
 style/tilex32.png
 style/tilex48.png

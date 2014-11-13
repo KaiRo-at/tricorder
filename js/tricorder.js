@@ -305,6 +305,72 @@ var gModSound = {
   },
 }
 
+var gModEnv = {
+  activate: function() {
+    gSounds.scan.play();
+    document.getElementById("envunavail").style.display = "none";
+    document.getElementById("envavail").style.display = "block";
+    window.addEventListener("devicelight", this.lightEvent, true);
+    window.addEventListener("deviceproximity", this.proxEvent, true);
+    setTimeout(function() {
+      if ((document.getElementById("envLight").textContent == "...") &&
+          (document.getElementById("envDistance").textContent == "...")) {
+        gModEnv.deactivate();
+      }
+    }, 5000);
+    try {
+      for (var cameraId of window.navigator.mozCameras.getListOfCameras()) {
+        window.navigator.mozCameras.getCamera({camera: cameraId}, function(aCamera) {
+            if (aCamera.capabilities.flashModes.indexOf('torch') !== -1) {
+              this.flashCamera = aCamera;
+            }
+        });
+      }
+      if (this.flashCamera) {
+        document.getElementById("envFlashOn").onclick = gModEnv.switchFlashlight(true);
+        document.getElementById("envFlashOff").onclick = gModEnv.switchFlashlight(false);
+        document.getElementById("envFlashUnavail").style.display = "none";
+        document.getElementById("envFlashAvail").style.display = "block";
+      }
+    } catch (e) {
+      // camera api not supported
+      document.getElementById("envFlashUnavail").style.display = "block";
+      document.getElementById("envFlashAvail").style.display = "none";
+    }
+  },
+  deactivate: function() {
+    gSounds.scan.pause();
+    window.removeEventListener("devicelight", this.lightEvent, true);
+    window.removeEventListener("deviceproximity", this.proxEvent, true);
+    document.getElementById("envunavail").style.display = "block";
+    document.getElementById("envavail").style.display = "none";
+    document.getElementById("envLight").textContent = "...";
+    document.getElementById("envDistance").textContent = "...";
+  },
+  lightEvent: function(lightData) {
+    // See http://www.w3.org/TR/ambient-light/
+    document.getElementById("envLight").textContent = lightData.value + " lux";
+  },
+  proxEvent: function(proxData) {
+    // See http://www.w3.org/TR/2012/WD-proximity-20120712/
+    if (proxData.value >= proxData.max) {
+      document.getElementById("envDistance").textContent = "(maximum, >= " + proxData.value + " cm)";
+    }
+    else if (proxData.value <= proxData.min) {
+      document.getElementById("envDistance").textContent = "(minimum, <= " + proxData.value + " cm)";
+    }
+    else {
+      document.getElementById("envDistance").textContent = proxData.value + " cm";
+    }
+  },
+  flashCamera: null,
+  switchFlashlight: function(aEnabled) {
+    if (this.flashCamera) {
+      this.flashCamera.flashMode = aEnabled ? 'torch' : 'off';
+    }
+  }
+}
+
 var gModDev = {
   activate: function() {
     gSounds.scan.play();

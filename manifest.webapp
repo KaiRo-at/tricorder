@@ -3,12 +3,16 @@
   "description": "Display data from your device sensors in Star Trek style.",
   "version": "1.DVER",
   "launch_path": "/index.html",
+  "type": "privileged",
   "permissions": {
     "geolocation": {
-      "description": "Determine the global position to display in the tricorder."
+      "description": "Determine the location in the position module."
     },
     "audio-capture": {
       "description": "Capture microphone audio for the sound module."
+    },
+    "camera": {
+      "description": "Turn camera flash light on/off in environment module."
     }
   },
   "developer": {

@@ -35,6 +35,7 @@
 <li id="navPos">Position</li>
 <li id="navGrav">Gravity</li>
 <li id="navSound">Sound</li>
+<li id="navEnv">Environment</li>
 <li id="navDev">Device</li>
 <li id="navOther">Other</li>
 </ul>
@@ -108,6 +109,28 @@ a better device.
 </p>
 <div id="soundavail" style="display:none">
 <canvas id="soundcanvas" width="300" height="300"></canvas>
+</div>
+</section>
+
+<section id="sectEnv">
+<p id="envunavail">
+Environment sensors are unavailable on this tricorder device.
+<br/>Please talk to your superior officer or Starfleet contact to acquire
+a better device.
+</p>
+<div id="envavail" style="display:none">
+<table>
+<tr><td>Light:</td><td id="envLight" class="envVal">...</td></tr>
+<tr><td>Distance:</td><td id="envDistance" class="envVal">...</td></tr>
+</table>
+<div id="envFlashAvail" style="display:none">
+Flashlight:
+<button id="envFlashOn" class="envButton">On</button>
+<button id="envFlashOff" class="envButton">Off</button>
+</div>
+<div id="envFlashUnavail">
+<!-- No camera with flash available -->
+</div>
 </div>
 </section>
 
