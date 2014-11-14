@@ -242,6 +242,19 @@ section > p:first-child {
   padding-top: 1em;
 }
 
+button {
+  font: inherit;
+  border: none;
+  color: #000000;
+  background-color: #C09070;
+  border-radius: 3000px;
+  margin: 0 .25em;
+}
+
+button.disabled {
+  background-color: #402858;
+}
+
 .posVal, .gravVal {
   text-align: right;
 }
@@ -260,6 +273,22 @@ section > p:first-child {
 
 #soundavail {
   height: 100%;
+}
+
+#envFlashAvail {
+  padding: 1em 3px 0;
+}
+
+#envFlashOn {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#envFlashOff {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 @media screen and (min-width: 500px) {

@@ -323,24 +323,29 @@ var gModEnv = {
       }
     }, 5000);
     try {
-      for (var cameraId of window.navigator.mozCameras.getListOfCameras()) {
-        window.navigator.mozCameras.getCamera({camera: cameraId}, function(aCamera) {
+      var cameras = navigator.mozCameras.getListOfCameras();
+      for (i = 0; i < cameras.length; i++) {
+        var promise = navigator.mozCameras.getCamera(cameras[i], {},
+          function(aCamera) {
             if (aCamera.capabilities.flashModes.indexOf('torch') !== -1) {
-              this.flashCamera = aCamera;
+              gModEnv.foundFlashCamera(aCamera);
             }
-        });
-      }
-      if (this.flashCamera) {
-        document.getElementById("envFlashOn").onclick = gModEnv.switchFlashlight(true);
-        document.getElementById("envFlashOff").onclick = gModEnv.switchFlashlight(false);
-        document.getElementById("envFlashUnavail").style.display = "none";
-        document.getElementById("envFlashAvail").style.display = "block";
+          },
+          function(aError) { console.log("camera error: " + aError); }
+        );
       }
     } catch (e) {
       // camera api not supported
       document.getElementById("envFlashUnavail").style.display = "block";
       document.getElementById("envFlashAvail").style.display = "none";
     }
+  },
+  foundFlashCamera(aCamera) {
+    this.flashCamera = aCamera;
+    document.getElementById("envFlashOn").onclick = function() { console.log("on"); gModEnv.switchFlashlight(true); };
+    document.getElementById("envFlashOff").onclick = function() { console.log("off"); gModEnv.switchFlashlight(false); };
+    document.getElementById("envFlashUnavail").style.display = "none";
+    document.getElementById("envFlashAvail").style.display = "block";
   },
   deactivate: function() {
     gSounds.scan.pause();
@@ -371,6 +376,8 @@ var gModEnv = {
   switchFlashlight: function(aEnabled) {
     if (this.flashCamera) {
       this.flashCamera.flashMode = aEnabled ? 'torch' : 'off';
+      document.getElementById("envFlashOn").disabled == aEnabled;
+      document.getElementById("envFlashOff").disabled == !aEnabled;
     }
   }
 }
