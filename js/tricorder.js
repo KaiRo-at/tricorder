@@ -376,8 +376,8 @@ var gModEnv = {
   switchFlashlight: function(aEnabled) {
     if (this.flashCamera) {
       this.flashCamera.flashMode = aEnabled ? 'torch' : 'off';
-      document.getElementById("envFlashOn").disabled == aEnabled;
-      document.getElementById("envFlashOff").disabled == !aEnabled;
+      document.getElementById("envFlashOn").disabled = aEnabled;
+      document.getElementById("envFlashOff").disabled = !aEnabled;
     }
   }
 }

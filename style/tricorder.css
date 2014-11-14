@@ -248,10 +248,9 @@ button {
   color: #000000;
   background-color: #C09070;
   border-radius: 3000px;
-  margin: 0 .25em;
 }
 
-button.disabled {
+button:disabled {
   background-color: #402858;
 }
 
@@ -276,19 +275,28 @@ button.disabled {
 }
 
 #envFlashAvail {
-  padding: 1em 3px 0;
+  margin-top: .5em;
+  padding: .5em 3px 0;
+  border-top: 2px solid #A09090;
+}
+
+.envButton {
+  font-size: 200%;
+  margin-top: .25em;
 }
 
 #envFlashOn {
-  margin-right: 0;
+  margin-right: 3px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  padding-left: .5em;
 }
 
 #envFlashOff {
   margin-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  padding-right: .5em;
 }
 
 @media screen and (min-width: 500px) {
