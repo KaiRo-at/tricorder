@@ -5,7 +5,8 @@
 var gStardate, gSDBase;
 var gSounds = {};
 
-navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
 window.onload = function() {
   setTimeout(updateStardate, 0);
@@ -28,9 +29,8 @@ window.onload = function() {
   }
 
   gSounds.launch.play();
-  window.addEventListener("beforeunload", function( event ) {
-    gSounds.shutdown.play();
-  }, false);
+  window.addEventListener("beforeunload",
+      function(aEvent) { gSounds.shutdown.play(); }, false);
 }
 
 window.onresize = function() {
@@ -115,28 +115,28 @@ var gModPos = {
       document.getElementById("posunavail").style.display = "none";
       document.getElementById("posavail").style.display = "block";
       this.watchID = navigator.geolocation.watchPosition(
-        function(position) {
+        function(aPosition) {
            document.getElementById("posLat").textContent =
-               position.coords.latitude + "°";
+               aPosition.coords.latitude + "°";
            document.getElementById("posLong").textContent =
-               position.coords.longitude + "°";
+               aPosition.coords.longitude + "°";
            document.getElementById("posAlt").textContent =
-               position.coords.altitude.toFixed(0) + " m";
+               aPosition.coords.altitude.toFixed(0) + " m";
            document.getElementById("posAcc").textContent =
-               position.coords.accuracy.toFixed(0) + " m";
+               aPosition.coords.accuracy.toFixed(0) + " m";
            document.getElementById("posAltAcc").textContent =
-               position.coords.altitudeAccuracy.toFixed(0) + " m";
+               aPosition.coords.altitudeAccuracy.toFixed(0) + " m";
            document.getElementById("posHead").textContent =
-               position.coords.heading ? position.coords.heading.toFixed(0) + "°" : "---";
+               aPosition.coords.heading ? aPosition.coords.heading.toFixed(0) + "°" : "---";
            document.getElementById("posSpd").textContent =
-               position.coords.speed ? position.coords.speed.toFixed(1) + " m/s" : "---";
-           var locTime = new Date(position.timestamp);
+               aPosition.coords.speed ? aPosition.coords.speed.toFixed(1) + " m/s" : "---";
+           var locTime = new Date(aPosition.timestamp);
            document.getElementById("posTime").textContent = locTime.toISOString();
         },
-        function(error) {
+        function(aError) {
           // See https://developer.mozilla.org/en/Using_geolocation#Handling_errors
-          if (error.message) {
-            document.getElementById("posLat").textContent = error.message;
+          if (aError.message) {
+            document.getElementById("posLat").textContent = aError.message;
             document.getElementById("posLong").textContent = "...";
             document.getElementById("posAlt").textContent = "...";
             document.getElementById("posAcc").textContent = "...";
@@ -209,45 +209,55 @@ var gModGrav = {
     document.getElementById("gravZ").textContent = "...";
     //document.getElementById("gravRot").textContent = "...";
   },
-  orientEvent: function(orientData) {
-    //document.getElementById("gravAbs").textContent = orientData.absolute;
-    document.getElementById("gravAlpha").textContent = orientData.alpha.toFixed(1) + "°";
-    document.getElementById("gravBeta").textContent = orientData.beta.toFixed(1) + "°";
-    document.getElementById("gravGamma").textContent = orientData.gamma.toFixed(1) + "°";
+  orientEvent: function(aOrientData) {
+    //document.getElementById("gravAbs").textContent = aOrientData.absolute;
+    document.getElementById("gravAlpha").textContent =
+        aOrientData.alpha.toFixed(1) + "°";
+    document.getElementById("gravBeta").textContent =
+        aOrientData.beta.toFixed(1) + "°";
+    document.getElementById("gravGamma").textContent =
+        aOrientData.gamma.toFixed(1) + "°";
   },
-  motionEvent: function(event) {
-    var gravTotal = 
-        Math.sqrt(Math.pow(event.accelerationIncludingGravity.x, 2) +
-                  Math.pow(event.accelerationIncludingGravity.y, 2) +
-                  Math.pow(event.accelerationIncludingGravity.z, 2));
-    document.getElementById("gravTotal").textContent = gravTotal.toFixed(2) + " m/s²";
-    document.getElementById("gravX").textContent = event.accelerationIncludingGravity.x.toFixed(2) + " m/s²";
-    document.getElementById("gravY").textContent = event.accelerationIncludingGravity.y.toFixed(2) + " m/s²";
-    document.getElementById("gravZ").textContent = event.accelerationIncludingGravity.z.toFixed(2) + " m/s²";
-    //document.getElementById("gravRot").textContent = event.rotationRate;
+  motionEvent: function(aEvent) {
+    var gravTotal =
+        Math.sqrt(Math.pow(aEvent.accelerationIncludingGravity.x, 2) +
+                  Math.pow(aEvent.accelerationIncludingGravity.y, 2) +
+                  Math.pow(aEvent.accelerationIncludingGravity.z, 2));
+    document.getElementById("gravTotal").textContent =
+        gravTotal.toFixed(2) + " m/s²";
+    document.getElementById("gravX").textContent =
+        aEvent.accelerationIncludingGravity.x.toFixed(2) + " m/s²";
+    document.getElementById("gravY").textContent =
+        aEvent.accelerationIncludingGravity.y.toFixed(2) + " m/s²";
+    document.getElementById("gravZ").textContent =
+        aEvent.accelerationIncludingGravity.z.toFixed(2) + " m/s²";
+    //document.getElementById("gravRot").textContent = aEvent.rotationRate;
   },
 }
 
 var gModSound = {
   activate: function() {
     //gSounds.scan.play();
-    if (navigator.getUserMedia && (window.AudioContext || window.webkitAudioContext)) {
+    if (navigator.getUserMedia &&
+        (window.AudioContext || window.webkitAudioContext)) {
       document.getElementById("soundunavail").style.display = "none";
       document.getElementById("soundavail").style.display = "block";
       navigator.getUserMedia({ audio: true },
          function(aLocalMediaStream) {
            gModSound.mAudio.stream = aLocalMediaStream;
-           gModSound.mAudio.context = new (window.AudioContext || window.webkitAudioContext)();
-           gModSound.mAudio.input = gModSound.mAudio.context.createMediaStreamSource(gModSound.mAudio.stream);
+           gModSound.mAudio.context = new (window.AudioContext ||
+                                           window.webkitAudioContext)();
+           gModSound.mAudio.input =
+               gModSound.mAudio.context.createMediaStreamSource(gModSound.mAudio.stream);
            // Could put a filter in between like in http://webaudioapi.com/samples/microphone/
            gModSound.mDisplay.canvas = document.getElementById("soundcanvas");
            gModSound.mDisplay.context = gModSound.mDisplay.canvas.getContext("2d");
            gModSound.rebuildCanvas();
          },
-         function(err) {
+         function(aError) {
            document.getElementById("soundunavail").style.display = "block";
            document.getElementById("soundavail").style.display = "none";
-           console.log(err);
+           console.log(aError);
          }
       );
     }
@@ -261,20 +271,25 @@ var gModSound = {
       window.cancelAnimationFrame(gModSound.mDisplay.AFRequestID);
       gModSound.mDisplay.AFRequestID = 0;
     }
-    gModSound.mDisplay.canvas.height = document.getElementById("soundavail").clientHeight - 4;
-    gModSound.mDisplay.canvas.width = document.getElementById("soundavail").clientWidth;
+    gModSound.mDisplay.canvas.height =
+        document.getElementById("soundavail").clientHeight - 4;
+    gModSound.mDisplay.canvas.width =
+        document.getElementById("soundavail").clientWidth;
     gModSound.mAudio.frequencySlices = (gModSound.mDisplay.canvas.width > 512) ?
-                                      512 :
-                                      Math.pow(2, Math.floor(Math.log(gModSound.mDisplay.canvas.width) / Math.LN2));
+        512 :
+        Math.pow(2, Math.floor(Math.log(gModSound.mDisplay.canvas.width) / Math.LN2));
     //console.log("slices: " + gModSound.mAudio.frequencySlices);
     gModSound.mAudio.analyzer = gModSound.mAudio.context.createAnalyser();
     // Make the FFT four times as large as needed as the upper three quarters turn out to be useless.
     gModSound.mAudio.analyzer.fftSize = gModSound.mAudio.frequencySlices * 4;
     //console.log("FFT: " + gModSound.mAudio.analyzer.fftSize);
     gModSound.mAudio.input.connect(gModSound.mAudio.analyzer);
-    gModSound.mDisplay.context.setTransform(1, 0, 0, -(gModSound.mDisplay.canvas.height/256), 0, gModSound.mDisplay.canvas.height);
+    gModSound.mDisplay.context.setTransform(1, 0, 0,
+                                            -(gModSound.mDisplay.canvas.height/256),
+                                            0, gModSound.mDisplay.canvas.height);
     gModSound.mDisplay.active = true;
-    gModSound.mDisplay.AFRequestID = window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
+    gModSound.mDisplay.AFRequestID =
+        window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
   },
   mAudio: {
     frequencySlices: 32, // Must be a multiple of 2 (see AnalyserNode.fftSize)
@@ -285,17 +300,22 @@ var gModSound = {
   paintAnalyzerFrame: function(aTimestamp) {
     var data = new Uint8Array(gModSound.mAudio.frequencySlices);
     gModSound.mAudio.analyzer.getByteFrequencyData(data);
-    gModSound.mDisplay.context.clearRect(0, 0, gModSound.mDisplay.canvas.width, gModSound.mDisplay.canvas.height);
+    gModSound.mDisplay.context.clearRect(0, 0, gModSound.mDisplay.canvas.width,
+                                         gModSound.mDisplay.canvas.height);
     // Out of experience, only the first half of the slices are actually useful.
     var wid = gModSound.mDisplay.canvas.width / gModSound.mAudio.frequencySlices;
     var fill = "#9C9CFF";
     for (var i = 0; i < gModSound.mAudio.frequencySlices; ++i) {
-      var newFill = (data[i] > 200) ? "#FF0000" : ((data[i] > 100) ? "#FFCF00" : "#9C9CFF");
-      if (fill != newFill) { gModSound.mDisplay.context.fillStyle = newFill; fill = newFill; }
+      var newFill = (data[i] > 200) ? "#FF0000" :
+                                      ((data[i] > 100) ? "#FFCF00" : "#9C9CFF");
+      if (fill != newFill) {
+        gModSound.mDisplay.context.fillStyle = newFill; fill = newFill;
+      }
       gModSound.mDisplay.context.fillRect(i*wid, 0, wid, data[i]);
     }
     if (gModSound.mDisplay.active)
-      gModSound.mDisplay.AFRequestID = window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
+      gModSound.mDisplay.AFRequestID =
+          window.requestAnimationFrame(gModSound.paintAnalyzerFrame);
   },
   resize: function() {
     gModSound.rebuildCanvas();
@@ -342,8 +362,10 @@ var gModEnv = {
   },
   foundFlashCamera: function(aCamera) {
     this.flashCamera = aCamera;
-    document.getElementById("envFlashOn").onclick = function() { console.log("on"); gModEnv.switchFlashlight(true); };
-    document.getElementById("envFlashOff").onclick = function() { console.log("off"); gModEnv.switchFlashlight(false); };
+    document.getElementById("envFlashOn").onclick =
+        function() { console.log("on"); gModEnv.switchFlashlight(true); };
+    document.getElementById("envFlashOff").onclick =
+        function() { console.log("off"); gModEnv.switchFlashlight(false); };
     document.getElementById("envFlashUnavail").style.display = "none";
     document.getElementById("envFlashAvail").style.display = "block";
   },
@@ -356,20 +378,23 @@ var gModEnv = {
     document.getElementById("envLight").textContent = "...";
     document.getElementById("envDistance").textContent = "...";
   },
-  lightEvent: function(lightData) {
+  lightEvent: function(aLightData) {
     // See http://www.w3.org/TR/ambient-light/
-    document.getElementById("envLight").textContent = lightData.value + " lux";
+    document.getElementById("envLight").textContent = aLightData.value + " lux";
   },
-  proxEvent: function(proxData) {
+  proxEvent: function(aProxData) {
     // See http://www.w3.org/TR/2012/WD-proximity-20120712/
-    if (proxData.value >= proxData.max) {
-      document.getElementById("envDistance").textContent = "(maximum, >= " + proxData.value + " cm)";
+    if (aProxData.value >= aProxData.max) {
+      document.getElementById("envDistance").textContent =
+          "(maximum, >= " + aProxData.value + " cm)";
     }
-    else if (proxData.value <= proxData.min) {
-      document.getElementById("envDistance").textContent = "(minimum, <= " + proxData.value + " cm)";
+    else if (aProxData.value <= aProxData.min) {
+      document.getElementById("envDistance").textContent =
+          "(minimum, <= " + aProxData.value + " cm)";
     }
     else {
-      document.getElementById("envDistance").textContent = proxData.value + " cm";
+      document.getElementById("envDistance").textContent =
+          aProxData.value + " cm";
     }
   },
   flashCamera: null,
@@ -401,7 +426,7 @@ var gModDev = {
         document.getElementById("devBattStatus").textContent = "charging";
       }
       else {
-        document.getElementById("devBattStatus").textContent = 
+        document.getElementById("devBattStatus").textContent =
             "charging, " + navigator.battery.chargingTime + "s remaining";
       }
     }
@@ -411,7 +436,7 @@ var gModDev = {
         document.getElementById("devBattStatus").textContent = "discharging";
       }
       else {
-        document.getElementById("devBattStatus").textContent = 
+        document.getElementById("devBattStatus").textContent =
             navigator.battery.dischargingTime + "s usage remaining";
       }
     }
