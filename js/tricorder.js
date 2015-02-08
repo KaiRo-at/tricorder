@@ -340,7 +340,7 @@ var gModEnv = {
       document.getElementById("envFlashAvail").style.display = "none";
     }
   },
-  foundFlashCamera(aCamera) {
+  foundFlashCamera: function(aCamera) {
     this.flashCamera = aCamera;
     document.getElementById("envFlashOn").onclick = function() { console.log("on"); gModEnv.switchFlashlight(true); };
     document.getElementById("envFlashOff").onclick = function() { console.log("off"); gModEnv.switchFlashlight(false); };
